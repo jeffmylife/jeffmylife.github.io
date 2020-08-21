@@ -7,51 +7,20 @@
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
-        <title>Test</title>
-        <description>&lt;p&gt;~ on dawns wake 2 tread - 1 wind all is nil ~&lt;/p&gt;
-&lt;p&gt;hello, friend&lt;/p&gt;
-&lt;p&gt;my name &amp;nbsp; &amp;nbsp;is john. &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; stamos&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; this is a text tester&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p&gt;;lkj &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; ;lkj &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp; asdf&lt;/p&gt;
-
-&lt;p&gt;The action   of every agent &lt;br /&gt;
-   into the world &lt;br /&gt;
-starts &lt;br /&gt;
-  from their physical selves. &lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;The action   of every agent &lt;br /&gt;
-   into the world &lt;br /&gt;
-starts &lt;br /&gt;
-  from their physical selves. &lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;The action   of every agent &lt;br /&gt;
- into the world &lt;br /&gt;
-Some test  a;l la &lt;br /&gt;
-   with some &lt;br /&gt;
-fasdf &lt;br /&gt;
-  ispacing. &lt;br /&gt;
-l
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;The action   of every agent &lt;br /&gt;
-   into the world &lt;br /&gt;
-starts &lt;br /&gt;
-  from their physical selves. &lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;~&lt;br /&gt;
-on dawns wake&lt;br /&gt;
-2 tread - 1 wind&lt;br /&gt;
-all is nil&lt;br /&gt;
+        <title></title>
+        <description>&lt;p&gt;&lt;img src=&quot;https://pbs.twimg.com/media/Ef8rN2kVAAEjGtg?format=jpg&amp;amp;name=small&quot; width=&quot;400&quot; height=&quot;250&quot; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;
+~&lt;br /&gt;
+on dawns &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; wake
+&lt;br /&gt;2 tread &amp;nbsp; &amp;nbsp; - &amp;nbsp; &amp;nbsp; 1 wind
+&lt;br /&gt;all is nil&lt;br /&gt;
 ~&lt;/p&gt;
-
+&lt;/blockquote&gt;
 </description>
-        <pubDate>Mon, 09 Jun 2014 04:21:29 -0700</pubDate>
-        <link>http://localhost:4000/poem/2014/06/09/test/</link>
-        <guid isPermaLink="true">http://localhost:4000/poem/2014/06/09/test/</guid>
+        <pubDate>Fri, 21 Aug 2020 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000/poem/2020/08/21/1/</link>
+        <guid isPermaLink="true">http://localhost:4000/poem/2020/08/21/1/</guid>
       </item>
     
   </channel>
