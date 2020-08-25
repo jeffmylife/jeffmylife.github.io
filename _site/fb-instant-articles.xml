@@ -10,7 +10,7 @@
         
             <item>
                 <title></title>
-                <link>http://localhost:4000/poem/2020/08/24/1/</link>
+                <link>http://localhost:4000/poem/2020/08/25/1/</link>
                 <content:encoded>
                     <![CDATA[
                     <p><img src="https://pbs.twimg.com/media/EgRbLGIUMAEoxqd?format=jpg&amp;name=large" width="400" height="250" /></p>
@@ -20,11 +20,11 @@
 
                     ]]>
                 </content:encoded>
-                <guid isPermaLink="false">/poem/2020/08/24/1/</guid>
+                <guid isPermaLink="false">/poem/2020/08/25/1/</guid>
                 <description>
                     
                 </description>
-                <pubDate>Mon, 24 Aug 2020 00:00:00 -0700</pubDate>
+                <pubDate>Tue, 25 Aug 2020 00:00:00 -0700</pubDate>
                 <author>Jeffrey Lemoine</author>
             </item>
         
