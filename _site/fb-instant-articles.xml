@@ -10,6 +10,26 @@
         
             <item>
                 <title></title>
+                <link>http://localhost:4000/poem/2020/08/27/1/</link>
+                <content:encoded>
+                    <![CDATA[
+                    <blockquote style="font-size=1">
+<p>my morning hope,<br />evening sun,<br />can I wish from the galaxy<br />in my mug?<br />to have you love me<br />like I need brew.</p></blockquote>
+
+                    ]]>
+                </content:encoded>
+                <guid isPermaLink="false">/poem/2020/08/27/1/</guid>
+                <description>
+                    
+                </description>
+                <pubDate>Thu, 27 Aug 2020 00:00:00 -0700</pubDate>
+                <author>Jeffrey Lemoine</author>
+            </item>
+        
+    
+        
+            <item>
+                <title></title>
                 <link>http://localhost:4000/poem/2020/08/26/1/</link>
                 <content:encoded>
                     <![CDATA[
