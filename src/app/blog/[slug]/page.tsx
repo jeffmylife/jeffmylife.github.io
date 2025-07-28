@@ -236,7 +236,15 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 }
                 // Fallback for pre without language
                 return (
-                  <pre className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg overflow-x-auto mb-6 text-sm" {...props}>
+                  <pre 
+                    className="p-4 rounded-lg overflow-x-auto mb-6 text-sm" 
+                    style={{
+                      backgroundColor: 'var(--surface)',
+                      color: 'var(--foreground)',
+                      border: '1px solid var(--border)'
+                    }}
+                    {...props}
+                  >
                     {children}
                   </pre>
                 );

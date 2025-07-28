@@ -1,18 +1,143 @@
 @import "tailwindcss";
-@import "highlight.js/styles/atom-one-dark.css";
 
-/* Custom syntax highlighting tweaks */
+/* Gruvbox Syntax Highlighting */
 .hljs {
-  background: #282c34 !important;
-  color: #abb2bf !important;
+  background: transparent !important;
+  color: var(--foreground) !important;
   border-radius: 0;
 }
 
-@media (prefers-color-scheme: light) {
-  .hljs {
-    background: #fafafa !important;
-    color: #383a42 !important;
-  }
+/* Ensure all code blocks use Gruvbox colors */
+pre {
+  background-color: var(--surface) !important;
+  color: var(--foreground) !important;
+}
+
+pre code {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+/* Gruvbox syntax colors - comprehensive coverage */
+.hljs-comment,
+.hljs-quote {
+  color: var(--text-muted) !important;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-type,
+.hljs-tag,
+.hljs-name {
+  color: var(--accent-red) !important;
+  font-weight: bold;
+}
+
+.hljs-string,
+.hljs-attr,
+.hljs-attribute {
+  color: var(--accent-green) !important;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-meta,
+.hljs-params {
+  color: var(--accent-purple) !important;
+}
+
+.hljs-function,
+.hljs-title,
+.hljs-class,
+.hljs-title.class_,
+.hljs-title.function_ {
+  color: var(--accent-blue) !important;
+  font-weight: bold;
+}
+
+.hljs-variable,
+.hljs-property,
+.hljs-attr {
+  color: var(--accent-orange) !important;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: var(--accent-primary) !important;
+}
+
+.hljs-operator,
+.hljs-punctuation {
+  color: var(--foreground) !important;
+}
+
+/* Language specific improvements */
+.hljs-doctag,
+.hljs-formula {
+  color: var(--accent-blue) !important;
+}
+
+.hljs-section,
+.hljs-selector-id {
+  color: var(--accent-primary) !important;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  color: var(--foreground) !important;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: var(--accent-orange) !important;
+}
+
+/* Gruvbox utility classes for MDX */
+.gruvbox-surface {
+  padding: 1rem;
+  background-color: var(--surface);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+.gruvbox-accent-orange {
+  color: var(--accent-orange);
+}
+
+.gruvbox-accent-primary {
+  color: var(--accent-primary);
+}
+
+.gruvbox-text {
+  color: var(--foreground);
+}
+
+.gruvbox-details {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.gruvbox-summary {
+  color: var(--accent-blue);
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.gruvbox-tip-box {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 2px dashed var(--accent-blue);
+  border-radius: 0.75rem;
+  background-color: var(--surface);
+  color: var(--foreground);
 }
 
 :root {

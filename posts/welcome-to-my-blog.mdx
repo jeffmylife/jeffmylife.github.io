@@ -91,22 +91,24 @@ git commit -m "Add MDX support"
 ### HTML Elements
 You can use HTML directly in MDX:
 
-<div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg mb-4">
-  <strong>Custom styled div</strong> - This is HTML with Tailwind classes!
+<div className="gruvbox-surface">
+  <strong className="gruvbox-accent-orange">Custom styled div</strong> - This is HTML using our beautiful Gruvbox theme!
 </div>
 
 ### JSX Components
 MDX allows you to use JSX components inline:
 
-<details>
-<summary>Click to expand</summary>
+<details className="gruvbox-details">
+<summary className="gruvbox-summary">Click to expand</summary>
 
+<div className="gruvbox-text">
 This content is hidden by default and can be expanded!
 
 You can put any markdown content here:
-- Lists
+- Lists  
 - **Bold text**
 - `Code snippets`
+</div>
 
 </details>
 
@@ -189,6 +191,6 @@ MDX gives you the best of both worlds:
 
 Perfect for technical blogs, documentation, and content that needs rich formatting!
 
-<div className="text-center mt-8 p-4 border-2 border-dashed border-blue-500 rounded-lg">
-  🎯 <strong>Pro Tip:</strong> Start simple with Markdown, then enhance with JSX as needed!
+<div className="gruvbox-tip-box">
+  🎯 <strong className="gruvbox-accent-primary">Pro Tip:</strong> Start simple with Markdown, then enhance with JSX as needed!
 </div>

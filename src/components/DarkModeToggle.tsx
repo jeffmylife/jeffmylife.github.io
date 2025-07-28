@@ -15,7 +15,6 @@ export default function DarkModeToggle() {
 
   const toggleDarkMode = () => {
     const newDarkMode = !isDark;
-    console.log('Toggling dark mode:', { from: isDark, to: newDarkMode });
     setIsDark(newDarkMode);
     
     // Store preference
@@ -24,10 +23,8 @@ export default function DarkModeToggle() {
     // Apply immediately
     if (newDarkMode) {
       document.documentElement.classList.add('dark');
-      console.log('Added dark class, current classes:', document.documentElement.className);
     } else {
       document.documentElement.classList.remove('dark');
-      console.log('Removed dark class, current classes:', document.documentElement.className);
     }
   };
 

@@ -28,26 +28,44 @@ export default function CodeBlock({ children, className, showLineNumbers = false
 
   return (
     <div className="relative group">
-      <div className="flex items-center justify-between bg-gray-800 dark:bg-gray-900 text-gray-300 px-4 py-2 text-sm rounded-t-lg">
+      <div 
+        className="flex items-center justify-between px-4 py-2 text-sm rounded-t-lg"
+        style={{
+          backgroundColor: 'var(--surface-variant)',
+          color: 'var(--text-muted)',
+          borderBottom: '1px solid var(--border)'
+        }}
+      >
         <span className="font-mono text-xs uppercase tracking-wide">{language}</span>
         <button
           onClick={copyToClipboard}
-          className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-gray-700 dark:hover:bg-gray-800 px-2 py-1 rounded text-xs"
+          className="opacity-0 group-hover:opacity-100 transition-all duration-200 px-2 py-1 rounded text-xs hover:scale-105"
+          style={{
+            backgroundColor: copied ? 'var(--accent-green)' : 'transparent',
+            color: copied ? 'var(--background)' : 'var(--text-muted)',
+            border: `1px solid ${copied ? 'var(--accent-green)' : 'var(--border)'}`,
+          }}
         >
           {copied ? '✓ Copied!' : 'Copy'}
         </button>
       </div>
-      <div className="bg-gray-100 dark:bg-gray-900 rounded-b-lg overflow-x-auto">
-        <pre className="p-4 text-sm leading-6">
+      <div 
+        className="rounded-b-lg overflow-x-auto"
+        style={{backgroundColor: 'var(--surface)'}}
+      >
+        <pre className="p-4 text-sm leading-6" style={{color: 'var(--foreground)'}}>
           <code className={className}>
             {showLineNumbers ? (
               <div className="table w-full">
                 {lines.map((line, index) => (
                   <div key={index} className="table-row">
-                    <span className="table-cell pr-4 text-gray-400 select-none text-right w-8">
+                    <span 
+                      className="table-cell pr-4 select-none text-right w-8"
+                      style={{color: 'var(--text-muted)'}}
+                    >
                       {index + 1}
                     </span>
-                    <span className="table-cell">
+                    <span className="table-cell" style={{color: 'var(--foreground)'}}>
                       {line}
                       {index < lines.length - 1 && '\n'}
                     </span>
