@@ -6,7 +6,8 @@ import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
-import CodeBlock from '@/components/CodeBlock';
+import { preProcess, postProcess } from '@/lib/rehype-pre-raw';
+import CopyButton from '@/components/CopyButton';
 import DarkModeToggle from '@/components/DarkModeToggle';
 import HeaderWithAnchor from '@/components/HeaderWithAnchor';
 import { generateSlug } from '@/lib/utils';
@@ -193,7 +194,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
         <div className="prose prose-lg prose-gray dark:prose-invert max-w-none">
           <ReactMarkdown
             remarkPlugins={[remarkGfm, remarkBreaks]}
-            rehypePlugins={[rehypeHighlight, rehypeRaw]}
+            rehypePlugins={[preProcess, rehypeHighlight, postProcess, rehypeRaw]}
             components={{
               h1: ({children, ...props}) => <HeaderWithAnchor level={1} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
               h2: ({children, ...props}) => <HeaderWithAnchor level={2} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
@@ -219,34 +220,41 @@ export default async function BlogPost({ params }: BlogPostProps) {
                   </code>
                 );
               },
-              pre: ({children, ...props}) => {
-                // Extract the code element and its props
-                const codeElement = children as React.ReactElement<{className?: string; children: string}>;
-                if (codeElement?.props?.className?.startsWith('language-')) {
-                  return (
-                    <div className="mb-6">
-                      <CodeBlock 
-                        className={codeElement.props.className}
-                        showLineNumbers={true}
-                      >
-                        {codeElement.props.children}
-                      </CodeBlock>
-                    </div>
-                  );
-                }
-                // Fallback for pre without language
+              pre: (props: React.HTMLProps<HTMLPreElement> & { raw?: string }) => {
+                const { children, raw, ...otherProps } = props;
+                // Extract language from the code element
+                const codeElement = children as React.ReactElement<{className?: string}>;
+                const className = codeElement?.props?.className || '';
+                const language = className.replace('hljs language-', '').replace('language-', '') || 'text';
+                
                 return (
-                  <pre 
-                    className="p-4 rounded-lg overflow-x-auto mb-6 text-sm" 
-                    style={{
-                      backgroundColor: 'var(--surface)',
-                      color: 'var(--foreground)',
-                      border: '1px solid var(--border)'
-                    }}
-                    {...props}
-                  >
-                    {children}
-                  </pre>
+                  <div className="relative group mb-6">
+                    {/* Header with language and copy button */}
+                    <div 
+                      className="flex items-center justify-between px-4 py-2 text-sm rounded-t-lg"
+                      style={{
+                        backgroundColor: 'var(--surface-variant)',
+                        color: 'var(--text-muted)',
+                        borderBottom: '1px solid var(--border)'
+                      }}
+                    >
+                      <span className="font-mono text-xs uppercase tracking-wide">{language}</span>
+                      {raw && <CopyButton text={raw} />}
+                    </div>
+                    {/* Code content */}
+                    <pre 
+                      className="p-4 rounded-b-lg overflow-x-auto text-sm m-0" 
+                      style={{
+                        backgroundColor: 'var(--surface)',
+                        color: 'var(--foreground)',
+                        border: '1px solid var(--border)',
+                        borderTop: 'none'
+                      }}
+                      {...otherProps}
+                    >
+                      {children}
+                    </pre>
+                  </div>
                 );
               },
               blockquote: ({children, ...props}) => (

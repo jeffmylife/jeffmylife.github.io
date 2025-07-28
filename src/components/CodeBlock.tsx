@@ -39,14 +39,16 @@ export default function CodeBlock({ children, className, showLineNumbers = false
         <span className="font-mono text-xs uppercase tracking-wide">{language}</span>
         <button
           onClick={copyToClipboard}
-          className="opacity-0 group-hover:opacity-100 transition-all duration-200 px-2 py-1 rounded text-xs hover:scale-105"
+          className="transition-all duration-200 px-3 py-1.5 rounded text-xs font-medium hover:scale-105 active:scale-95"
           style={{
-            backgroundColor: copied ? 'var(--accent-green)' : 'transparent',
-            color: copied ? 'var(--background)' : 'var(--text-muted)',
-            border: `1px solid ${copied ? 'var(--accent-green)' : 'var(--border)'}`,
+            backgroundColor: copied ? 'var(--accent-green)' : 'var(--surface)',
+            color: copied ? 'var(--background)' : 'var(--accent-blue)',
+            border: `1px solid ${copied ? 'var(--accent-green)' : 'var(--accent-blue)'}`,
+            boxShadow: copied ? '0 2px 4px rgba(0,0,0,0.1)' : 'none'
           }}
+          title={copied ? 'Code copied to clipboard!' : 'Copy code to clipboard'}
         >
-          {copied ? '✓ Copied!' : 'Copy'}
+          {copied ? '✓ Copied!' : '📋 Copy'}
         </button>
       </div>
       <div 
