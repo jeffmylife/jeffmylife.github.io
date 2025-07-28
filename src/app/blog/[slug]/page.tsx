@@ -222,33 +222,22 @@ export default async function BlogPost({ params }: BlogPostProps) {
               },
               pre: (props: React.HTMLProps<HTMLPreElement> & { raw?: string }) => {
                 const { children, raw, ...otherProps } = props;
-                // Extract language from the code element
-                const codeElement = children as React.ReactElement<{className?: string}>;
-                const className = codeElement?.props?.className || '';
-                const language = className.replace('hljs language-', '').replace('language-', '') || 'text';
                 
                 return (
                   <div className="relative group mb-6">
-                    {/* Header with language and copy button */}
-                    <div 
-                      className="flex items-center justify-between px-4 py-2 text-sm rounded-t-lg"
-                      style={{
-                        backgroundColor: 'var(--surface-variant)',
-                        color: 'var(--text-muted)',
-                        borderBottom: '1px solid var(--border)'
-                      }}
-                    >
-                      <span className="font-mono text-xs uppercase tracking-wide">{language}</span>
-                      {raw && <CopyButton text={raw} />}
-                    </div>
+                    {/* Copy button positioned absolutely */}
+                    {raw && (
+                      <div className="absolute top-3 right-3 z-10">
+                        <CopyButton text={raw} />
+                      </div>
+                    )}
                     {/* Code content */}
                     <pre 
-                      className="p-4 rounded-b-lg overflow-x-auto text-sm m-0" 
+                      className="p-4 rounded-lg overflow-x-auto text-sm m-0" 
                       style={{
                         backgroundColor: 'var(--surface)',
                         color: 'var(--foreground)',
-                        border: '1px solid var(--border)',
-                        borderTop: 'none'
+                        border: '1px solid var(--border)'
                       }}
                       {...otherProps}
                     >

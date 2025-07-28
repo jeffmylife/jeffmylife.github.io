@@ -23,16 +23,16 @@ export default function CopyButton({ text, className = '' }: CopyButtonProps) {
   return (
     <button
       onClick={copy}
-      className={`transition-all duration-200 px-3 py-1.5 rounded text-xs font-medium hover:scale-105 active:scale-95 ${className}`}
+      className={`transition-all duration-200 w-8 h-8 flex items-center justify-center rounded hover:scale-110 active:scale-95 ${className}`}
       style={{
         backgroundColor: isCopied ? 'var(--accent-green)' : 'var(--surface)',
-        color: isCopied ? 'var(--background)' : 'var(--accent-blue)',
-        border: `1px solid ${isCopied ? 'var(--accent-green)' : 'var(--accent-blue)'}`,
-        boxShadow: isCopied ? '0 2px 4px rgba(0,0,0,0.1)' : 'none'
+        color: isCopied ? 'var(--background)' : 'var(--text-muted)',
+        border: `1px solid ${isCopied ? 'var(--accent-green)' : 'var(--border)'}`,
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
       }}
       title={isCopied ? 'Code copied to clipboard!' : 'Copy code to clipboard'}
     >
-      {isCopied ? '✓ Copied!' : '📋 Copy'}
+      {isCopied ? '✓' : '📋'}
     </button>
   );
 }
