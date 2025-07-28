@@ -1,5 +1,19 @@
 @import "tailwindcss";
-@import "highlight.js/styles/github.css";
+@import "highlight.js/styles/atom-one-dark.css";
+
+/* Custom syntax highlighting tweaks */
+.hljs {
+  background: #282c34 !important;
+  color: #abb2bf !important;
+  border-radius: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  .hljs {
+    background: #fafafa !important;
+    color: #383a42 !important;
+  }
+}
 
 :root {
   --background: #ffffff;

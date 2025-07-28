@@ -4,12 +4,26 @@ import matter from 'gray-matter';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
+function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
+}
+
 export interface Post {
   slug: string;
   title: string;
+  seoTitle?: string;
   date: string;
+  updatedOn?: string;
   excerpt?: string;
+  abstract?: string;
   content: string;
+  tags?: string[];
+  category?: string;
+  isPublished?: boolean;
+  readingTime?: number;
+  featured?: boolean;
 }
 
 export function getAllPosts(): Post[] {
@@ -29,13 +43,23 @@ export function getAllPosts(): Post[] {
       return {
         slug,
         title: data.title || slug,
+        seoTitle: data.seoTitle,
         date: data.date || '',
-        excerpt: data.excerpt || '',
+        updatedOn: data.updatedOn,
+        excerpt: data.excerpt || data.abstract || '',
+        abstract: data.abstract,
         content,
+        tags: data.tags || [],
+        category: data.category,
+        isPublished: data.isPublished !== false, // Default to true unless explicitly false
+        readingTime: data.readingTime || calculateReadingTime(content),
+        featured: data.featured || false,
       };
     });
 
-  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+  return allPostsData
+    .filter(post => post.isPublished)
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 export function getPostBySlug(slug: string): Post | null {
@@ -47,9 +71,17 @@ export function getPostBySlug(slug: string): Post | null {
     return {
       slug,
       title: data.title || slug,
+      seoTitle: data.seoTitle,
       date: data.date || '',
-      excerpt: data.excerpt || '',
+      updatedOn: data.updatedOn,
+      excerpt: data.excerpt || data.abstract || '',
+      abstract: data.abstract,
       content,
+      tags: data.tags || [],
+      category: data.category,
+      isPublished: data.isPublished !== false,
+      readingTime: data.readingTime || calculateReadingTime(content),
+      featured: data.featured || false,
     };
   } catch {
     return null;

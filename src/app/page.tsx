@@ -28,16 +28,46 @@ export default function Home() {
             {posts.map((post) => (
               <article key={post.slug} className="border-b border-gray-200 dark:border-gray-700 pb-8">
                 <Link href={`/blog/${post.slug}`} className="block hover:opacity-80 transition-opacity">
+                  <div className="mb-2">
+                    {post.featured && (
+                      <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full mr-2 mb-2">
+                        Featured
+                      </span>
+                    )}
+                    {post.category && (
+                      <span className="inline-block bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded-full mr-2 mb-2">
+                        {post.category}
+                      </span>
+                    )}
+                  </div>
                   <h2 className="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400 hover:underline">
                     {post.title}
                   </h2>
-                  <time className="text-sm text-gray-500 dark:text-gray-400 mb-3 block">
-                    {post.date}
-                  </time>
-                  {post.excerpt && (
-                    <p className="text-gray-700 dark:text-gray-300">
-                      {post.excerpt}
+                  <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                    <time>{post.date}</time>
+                    {post.readingTime && (
+                      <span>{post.readingTime} min read</span>
+                    )}
+                    {post.updatedOn && post.updatedOn !== post.date && (
+                      <span>Updated: {post.updatedOn}</span>
+                    )}
+                  </div>
+                  {(post.excerpt || post.abstract) && (
+                    <p className="text-gray-700 dark:text-gray-300 mb-3">
+                      {post.excerpt || post.abstract}
                     </p>
+                  )}
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {post.tags.map((tag) => (
+                        <span 
+                          key={tag} 
+                          className="inline-block bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs px-2 py-1 rounded"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
                   )}
                 </Link>
               </article>
