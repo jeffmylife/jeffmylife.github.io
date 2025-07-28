@@ -8,7 +8,7 @@ abstract: "A comprehensive showcase of MDX capabilities including syntax highlig
 tags: ["mdx", "react", "nextjs", "markdown", "blog"]
 category: "development"
 isPublished: true
-featured: true
+featured: false
 ---
 
 # MDX Features Showcase
@@ -18,7 +18,8 @@ MDX combines the simplicity of **Markdown** with the power of **React components
 ## Standard Markdown Features
 
 ### Text Formatting
-- **Bold text** and *italic text*
+
+- **Bold text** and _italic text_
 - ~~Strikethrough text~~
 - `inline code` with syntax highlighting
 - [Links to external sites](https://nextjs.org)
@@ -57,6 +58,7 @@ git commit -m "Add MDX support"
 ### Lists and Tables
 
 #### Unordered Lists
+
 - Item 1
   - Nested item
   - Another nested item
@@ -64,22 +66,24 @@ git commit -m "Add MDX support"
 - Item 3
 
 #### Ordered Lists
+
 1. First step
 2. Second step
 3. Third step
 
 #### Tables
-| Feature | Supported | Notes |
-|---------|-----------|-------|
-| Markdown syntax | ✅ | Full support |
-| React components | ✅ | Inline JSX |
-| Syntax highlighting | ✅ | Multiple languages |
-| Math expressions | ❌ | Could be added |
+
+| Feature             | Supported | Notes              |
+| ------------------- | --------- | ------------------ |
+| Markdown syntax     | ✅        | Full support       |
+| React components    | ✅        | Inline JSX         |
+| Syntax highlighting | ✅        | Multiple languages |
+| Math expressions    | ❌        | Could be added     |
 
 ### Blockquotes
 
 > "The best way to predict the future is to invent it."
-> 
+>
 > — Alan Kay
 
 ### Horizontal Rules
@@ -89,13 +93,16 @@ git commit -m "Add MDX support"
 ## MDX-Specific Features
 
 ### HTML Elements
+
 You can use HTML directly in MDX:
 
 <div className="gruvbox-surface">
-  <strong className="gruvbox-accent-orange">Custom styled div</strong> - This is HTML using our beautiful Gruvbox theme!
+  <strong className="gruvbox-accent-orange">Custom styled div</strong> - This is
+  HTML using our beautiful Gruvbox theme!
 </div>
 
 ### JSX Components
+
 MDX allows you to use JSX components inline:
 
 <details className="gruvbox-details">
@@ -105,18 +112,22 @@ MDX allows you to use JSX components inline:
 This content is hidden by default and can be expanded!
 
 You can put any markdown content here:
-- Lists  
+
+- Lists
 - **Bold text**
 - `Code snippets`
-</div>
+  </div>
 
 </details>
 
 ### Emoji Support
+
 Add some personality with emojis: 🚀 ⚡ 💻 🎉 🔥
 
 ### Math-like Expressions
+
 While not true LaTeX, you can write mathematical expressions:
+
 - E = mc²
 - a² + b² = c²
 - ∑(i=1 to n) i = n(n+1)/2
@@ -124,11 +135,12 @@ While not true LaTeX, you can write mathematical expressions:
 ## Advanced Formatting
 
 ### Nested Lists with Mixed Types
+
 1. **Setup Phase**
    - Install dependencies
    - Configure environment
    - Set up database
-2. **Development Phase** 
+2. **Development Phase**
    - [ ] Write tests
    - [x] Implement features
    - [ ] Code review
@@ -155,14 +167,12 @@ class BlogManager {
   addPost(post: BlogPost): void {
     this.posts.push({
       ...post,
-      date: new Date().toISOString().split('T')[0]
+      date: new Date().toISOString().split("T")[0],
     });
   }
 
   getPostsByTag(tag: string): BlogPost[] {
-    return this.posts.filter(post => 
-      post.tags?.includes(tag)
-    );
+    return this.posts.filter((post) => post.tags?.includes(tag));
   }
 }
 ```
@@ -170,12 +180,14 @@ class BlogManager {
 ## Tips for Writing MDX
 
 ### DO's ✅
+
 - Mix markdown and JSX naturally
 - Use semantic HTML when needed
 - Keep JSX components simple
 - Utilize frontmatter for metadata
 
 ### DON'Ts ❌
+
 - Don't overuse complex JSX in content
 - Avoid deeply nested components
 - Don't forget accessibility
@@ -186,11 +198,13 @@ class BlogManager {
 ## Conclusion
 
 MDX gives you the best of both worlds:
+
 - The **simplicity** of Markdown for content
 - The **flexibility** of React for interactive elements
 
 Perfect for technical blogs, documentation, and content that needs rich formatting!
 
 <div className="gruvbox-tip-box">
-  🎯 <strong className="gruvbox-accent-primary">Pro Tip:</strong> Start simple with Markdown, then enhance with JSX as needed!
+  🎯 <strong className="gruvbox-accent-primary">Pro Tip:</strong> Start simple
+  with Markdown, then enhance with JSX as needed!
 </div>
