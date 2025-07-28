@@ -6,6 +6,7 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './posts/**/*.{md,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {},
   },

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/posts';
+import DarkModeToggle from '@/components/DarkModeToggle';
 
 export default function Home() {
   const posts = getAllPosts();
@@ -7,7 +8,10 @@ export default function Home() {
   return (
     <div className="min-h-screen p-8 max-w-4xl mx-auto">
       <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">Jeff&apos;s Blog</h1>
+        <div className="flex justify-between items-start mb-4">
+          <h1 className="text-4xl font-bold">Jeff&apos;s Blog</h1>
+          <DarkModeToggle />
+        </div>
         <p className="text-lg text-gray-600 dark:text-gray-400">
           Personal thoughts and tech insights
         </p>

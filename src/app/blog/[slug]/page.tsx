@@ -7,6 +7,9 @@ import remarkBreaks from 'remark-breaks';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import CodeBlock from '@/components/CodeBlock';
+import DarkModeToggle from '@/components/DarkModeToggle';
+import HeaderWithAnchor from '@/components/HeaderWithAnchor';
+import { generateSlug } from '@/lib/utils';
 import type { Metadata } from 'next';
 
 interface BlogPostProps {
@@ -122,13 +125,14 @@ export default async function BlogPost({ params }: BlogPostProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       
-      <nav className="mb-8">
+      <nav className="mb-8 flex justify-between items-center">
         <Link 
           href="/" 
           className="text-blue-600 dark:text-blue-400 hover:underline text-sm"
         >
           ← Back to Home
         </Link>
+        <DarkModeToggle />
       </nav>
       
       <article className="max-w-4xl mx-auto">
@@ -183,9 +187,12 @@ export default async function BlogPost({ params }: BlogPostProps) {
             remarkPlugins={[remarkGfm, remarkBreaks]}
             rehypePlugins={[rehypeHighlight, rehypeRaw]}
             components={{
-              h1: ({children, ...props}) => <h1 className="text-3xl font-bold mt-8 mb-4 text-gray-900 dark:text-gray-100" {...props}>{children}</h1>,
-              h2: ({children, ...props}) => <h2 className="text-2xl font-semibold mt-8 mb-4 text-gray-900 dark:text-gray-100" {...props}>{children}</h2>,
-              h3: ({children, ...props}) => <h3 className="text-xl font-semibold mt-6 mb-3 text-gray-900 dark:text-gray-100" {...props}>{children}</h3>,
+              h1: ({children, ...props}) => <HeaderWithAnchor level={1} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
+              h2: ({children, ...props}) => <HeaderWithAnchor level={2} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
+              h3: ({children, ...props}) => <HeaderWithAnchor level={3} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
+              h4: ({children, ...props}) => <HeaderWithAnchor level={4} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
+              h5: ({children, ...props}) => <HeaderWithAnchor level={5} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
+              h6: ({children, ...props}) => <HeaderWithAnchor level={6} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
               p: ({children, ...props}) => <p className="mb-4 leading-7 text-gray-700 dark:text-gray-300" {...props}>{children}</p>,
               code: ({children, className, ...props}) => {
                 const match = /language-(\w+)/.exec(className || '');
