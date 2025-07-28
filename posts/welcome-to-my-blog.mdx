@@ -1,45 +1,187 @@
 ---
-title: "Welcome to My Blog"
+title: "MDX Features Showcase"
 date: "2025-01-28"
-excerpt: "This is my first blog post using Next.js and MDX. Welcome to my personal blog!"
+excerpt: "Exploring the powerful features of MDX - markdown with React components!"
 ---
 
-# Welcome to My Blog!
+# MDX Features Showcase
 
-This is my first blog post using **Next.js** and **MDX**. I'm excited to share my thoughts and experiences here.
+MDX combines the simplicity of **Markdown** with the power of **React components**. Here's what you can do:
 
-## What You Can Expect
+## Standard Markdown Features
 
-- Technical insights and tutorials
-- Personal projects and learnings
-- Random thoughts and observations
+### Text Formatting
+- **Bold text** and *italic text*
+- ~~Strikethrough text~~
+- `inline code` with syntax highlighting
+- [Links to external sites](https://nextjs.org)
 
-## How This Blog Works
+### Code Blocks with Syntax Highlighting
 
-This blog is built with:
+```javascript
+// JavaScript example
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
 
-- **Next.js 15** with App Router
-- **MDX** for writing content with React components
-- **Tailwind CSS** for styling
-- **TypeScript** for type safety
-- **GitHub Pages** for hosting
-
-## Adding New Posts
-
-To add a new blog post, simply create a new `.mdx` file in the `posts/` directory with frontmatter like this:
-
-```markdown
----
-title: "Your Post Title"
-date: "2025-01-28"
-excerpt: "A brief description of your post"
----
-
-Your content here...
+console.log(fibonacci(10)); // 55
 ```
 
-That's it! The blog will automatically pick up new posts and display them on the homepage.
+```python
+# Python example
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + middle + quicksort(right)
+```
+
+```bash
+# Terminal commands
+npm install next-mdx-remote
+git add .
+git commit -m "Add MDX support"
+```
+
+### Lists and Tables
+
+#### Unordered Lists
+- Item 1
+  - Nested item
+  - Another nested item
+- Item 2
+- Item 3
+
+#### Ordered Lists
+1. First step
+2. Second step
+3. Third step
+
+#### Tables
+| Feature | Supported | Notes |
+|---------|-----------|-------|
+| Markdown syntax | ✅ | Full support |
+| React components | ✅ | Inline JSX |
+| Syntax highlighting | ✅ | Multiple languages |
+| Math expressions | ❌ | Could be added |
+
+### Blockquotes
+
+> "The best way to predict the future is to invent it."
+> 
+> — Alan Kay
+
+### Horizontal Rules
 
 ---
 
-Thanks for reading, and stay tuned for more posts!
+## MDX-Specific Features
+
+### HTML Elements
+You can use HTML directly in MDX:
+
+<div style={{padding: '1rem', backgroundColor: '#f3f4f6', borderRadius: '0.5rem', marginBottom: '1rem'}}>
+  <strong>Custom styled div</strong> - This is HTML with inline styles!
+</div>
+
+### JSX Components
+MDX allows you to use JSX components inline:
+
+<details>
+<summary>Click to expand</summary>
+
+This content is hidden by default and can be expanded!
+
+You can put any markdown content here:
+- Lists
+- **Bold text**
+- `Code snippets`
+
+</details>
+
+### Emoji Support
+Add some personality with emojis: 🚀 ⚡ 💻 🎉 🔥
+
+### Math-like Expressions
+While not true LaTeX, you can write mathematical expressions:
+- E = mc²
+- a² + b² = c²
+- ∑(i=1 to n) i = n(n+1)/2
+
+## Advanced Formatting
+
+### Nested Lists with Mixed Types
+1. **Setup Phase**
+   - Install dependencies
+   - Configure environment
+   - Set up database
+2. **Development Phase** 
+   - [ ] Write tests
+   - [x] Implement features
+   - [ ] Code review
+3. **Deployment Phase**
+   - Build application
+   - Deploy to staging
+   - Deploy to production
+
+### Complex Code Example
+
+```typescript
+// TypeScript interface and implementation
+interface BlogPost {
+  title: string;
+  date: string;
+  excerpt?: string;
+  content: string;
+  tags?: string[];
+}
+
+class BlogManager {
+  private posts: BlogPost[] = [];
+
+  addPost(post: BlogPost): void {
+    this.posts.push({
+      ...post,
+      date: new Date().toISOString().split('T')[0]
+    });
+  }
+
+  getPostsByTag(tag: string): BlogPost[] {
+    return this.posts.filter(post => 
+      post.tags?.includes(tag)
+    );
+  }
+}
+```
+
+## Tips for Writing MDX
+
+### DO's ✅
+- Mix markdown and JSX naturally
+- Use semantic HTML when needed
+- Keep JSX components simple
+- Utilize frontmatter for metadata
+
+### DON'Ts ❌
+- Don't overuse complex JSX in content
+- Avoid deeply nested components
+- Don't forget accessibility
+- Don't mix conflicting styles
+
+---
+
+## Conclusion
+
+MDX gives you the best of both worlds:
+- The **simplicity** of Markdown for content
+- The **flexibility** of React for interactive elements
+
+Perfect for technical blogs, documentation, and content that needs rich formatting!
+
+<div style={{textAlign: 'center', marginTop: '2rem', padding: '1rem', border: '2px dashed #6366f1', borderRadius: '0.5rem'}}>
+  🎯 <strong>Pro Tip:</strong> Start simple with Markdown, then enhance with JSX as needed!
+</div>
