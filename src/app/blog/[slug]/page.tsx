@@ -128,7 +128,8 @@ export default async function BlogPost({ params }: BlogPostProps) {
       <nav className="mb-8 flex justify-between items-center">
         <Link 
           href="/" 
-          className="text-blue-600 dark:text-blue-400 hover:underline text-sm"
+          className="text-sm hover:underline transition-colors"
+          style={{color: 'var(--accent-blue)'}}
         >
           ← Back to Home
         </Link>
@@ -139,41 +140,48 @@ export default async function BlogPost({ params }: BlogPostProps) {
         <header className="mb-8">
           <div className="mb-4">
             {post.featured && (
-              <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm px-3 py-1 rounded-full mr-3 mb-2">
-                Featured Post
+              <span 
+                className="inline-block text-sm font-medium px-3 py-1 rounded-full mr-3 mb-2"
+                style={{backgroundColor: 'var(--accent-primary)', color: 'var(--background)'}}
+              >
+                ⭐ Featured Post
               </span>
             )}
             {post.category && (
-              <span className="inline-block bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm px-3 py-1 rounded-full mr-3 mb-2">
+              <span 
+                className="inline-block text-sm px-3 py-1 rounded-full mr-3 mb-2"
+                style={{backgroundColor: 'var(--surface)', color: 'var(--text-muted)'}}
+              >
                 {post.category}
               </span>
             )}
           </div>
           
-          <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">{post.title}</h1>
+          <h1 className="text-5xl font-bold mb-6" style={{color: 'var(--foreground)'}}>{post.title}</h1>
           
           {post.abstract && (
-            <p className="text-xl text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+            <p className="text-xl mb-8 leading-relaxed" style={{color: 'var(--text-muted)'}}>
               {post.abstract}
             </p>
           )}
           
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
-            <time>Published: {post.date}</time>
+          <div className="flex flex-wrap items-center gap-4 text-sm mb-6" style={{color: 'var(--text-muted)'}}>
+            <time>📅 Published: {post.date}</time>
             {post.updatedOn && post.updatedOn !== post.date && (
-              <time>Updated: {post.updatedOn}</time>
+              <time>🔄 Updated: {post.updatedOn}</time>
             )}
             {post.readingTime && (
-              <span>{post.readingTime} minute read</span>
+              <span>📖 {post.readingTime} minute read</span>
             )}
           </div>
           
           {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-6">
+            <div className="flex flex-wrap gap-2 mb-8">
               {post.tags.map((tag) => (
                 <span 
                   key={tag} 
-                  className="inline-block bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-sm px-3 py-1 rounded-full"
+                  className="inline-block text-sm px-3 py-1 rounded-full"
+                  style={{backgroundColor: 'var(--accent-green)', color: 'var(--background)'}}
                 >
                   #{tag}
                 </span>
@@ -193,7 +201,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
               h4: ({children, ...props}) => <HeaderWithAnchor level={4} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
               h5: ({children, ...props}) => <HeaderWithAnchor level={5} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
               h6: ({children, ...props}) => <HeaderWithAnchor level={6} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
-              p: ({children, ...props}) => <p className="mb-4 leading-7 text-gray-700 dark:text-gray-300" {...props}>{children}</p>,
+              p: ({children, ...props}) => <p className="mb-4 leading-7" style={{color: 'var(--foreground)'}} {...props}>{children}</p>,
               code: ({children, className, ...props}) => {
                 const match = /language-(\w+)/.exec(className || '');
                 if (match) {
@@ -202,7 +210,11 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 }
                 // This is inline code
                 return (
-                  <code className="bg-gray-100 dark:bg-gray-800 text-red-600 dark:text-red-400 px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
+                  <code 
+                    className="px-1.5 py-0.5 rounded text-sm font-mono" 
+                    style={{backgroundColor: 'var(--surface)', color: 'var(--accent-red)'}}
+                    {...props}
+                  >
                     {children}
                   </code>
                 );
@@ -230,32 +242,52 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 );
               },
               blockquote: ({children, ...props}) => (
-                <blockquote className="border-l-4 border-blue-500 pl-4 py-2 mb-4 italic text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 rounded-r" {...props}>
+                <blockquote 
+                  className="pl-4 py-3 mb-6 italic rounded-r border-l-4" 
+                  style={{
+                    borderColor: 'var(--accent-blue)',
+                    backgroundColor: 'var(--surface)',
+                    color: 'var(--text-muted)'
+                  }}
+                  {...props}
+                >
                   {children}
                 </blockquote>
               ),
-              ul: ({children, ...props}) => <ul className="mb-4 pl-6 list-disc text-gray-700 dark:text-gray-300" {...props}>{children}</ul>,
-              ol: ({children, ...props}) => <ol className="mb-4 pl-6 list-decimal text-gray-700 dark:text-gray-300" {...props}>{children}</ol>,
+              ul: ({children, ...props}) => <ul className="mb-4 pl-6 list-disc" style={{color: 'var(--foreground)'}} {...props}>{children}</ul>,
+              ol: ({children, ...props}) => <ol className="mb-4 pl-6 list-decimal" style={{color: 'var(--foreground)'}} {...props}>{children}</ol>,
               li: ({children, ...props}) => <li className="mb-2" {...props}>{children}</li>,
-              a: ({children, ...props}) => <a className="text-blue-600 dark:text-blue-400 hover:underline" {...props}>{children}</a>,
+              a: ({children, ...props}) => <a className="hover:underline transition-colors" style={{color: 'var(--accent-blue)'}} {...props}>{children}</a>,
               table: ({children, ...props}) => (
                 <div className="overflow-x-auto mb-6">
-                  <table className="min-w-full border-collapse border border-gray-300 dark:border-gray-700" {...props}>
+                  <table className="min-w-full border-collapse border" style={{borderColor: 'var(--border)'}} {...props}>
                     {children}
                   </table>
                 </div>
               ),
               th: ({children, ...props}) => (
-                <th className="border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 px-4 py-2 text-left font-semibold" {...props}>
+                <th 
+                  className="border px-4 py-2 text-left font-semibold" 
+                  style={{
+                    borderColor: 'var(--border)',
+                    backgroundColor: 'var(--surface)',
+                    color: 'var(--foreground)'
+                  }}
+                  {...props}
+                >
                   {children}
                 </th>
               ),
               td: ({children, ...props}) => (
-                <td className="border border-gray-300 dark:border-gray-700 px-4 py-2" {...props}>
+                <td 
+                  className="border px-4 py-2" 
+                  style={{borderColor: 'var(--border)', color: 'var(--foreground)'}}
+                  {...props}
+                >
                   {children}
                 </td>
               ),
-              hr: (props) => <hr className="my-8 border-gray-300 dark:border-gray-700" {...props} />,
+              hr: (props) => <hr className="my-8" style={{borderColor: 'var(--border)'}} {...props} />,
             }}
           >
             {post.content}

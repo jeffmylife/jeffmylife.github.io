@@ -12,7 +12,7 @@ interface HeaderWithAnchorProps {
 export default function HeaderWithAnchor({ level, children, id, className = '' }: HeaderWithAnchorProps) {
   const [showAnchor, setShowAnchor] = useState(false);
   
-  const baseClasses = 'group relative font-semibold text-gray-900 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300';
+  const baseClasses = 'group relative font-bold transition-colors';
   
   const sizeClasses = {
     1: 'text-4xl mt-12 mb-6',
@@ -34,13 +34,14 @@ export default function HeaderWithAnchor({ level, children, id, className = '' }
   };
 
   return (
-    <Tag id={id} className={finalClassName}>
-      <a href={`#${id}`} className="no-underline text-inherit">
+    <Tag id={id} className={finalClassName} style={{color: 'var(--foreground)'}}>
+      <a href={`#${id}`} className="no-underline" style={{color: 'inherit'}}>
         {children}
       </a>
       <button
         onClick={handleCopyLink}
-        className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity text-blue-500 hover:text-blue-600 text-lg"
+        className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity text-lg"
+        style={{color: 'var(--accent-blue)'}}
         aria-label="Copy link to section"
         title="Copy link"
       >

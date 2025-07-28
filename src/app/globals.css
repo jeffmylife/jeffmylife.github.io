@@ -16,8 +16,35 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Gruvbox Light */
+  --background: #fbf1c7;
+  --foreground: #3c3836;
+  --surface: #f2e5bc;
+  --surface-variant: #ebdbb2;
+  --accent-primary: #d79921;
+  --accent-blue: #458588;
+  --accent-green: #98971a;
+  --accent-red: #cc241d;
+  --accent-orange: #d65d0e;
+  --accent-purple: #b16286;
+  --text-muted: #665c54;
+  --border: #d5c4a1;
+}
+
+.dark {
+  /* Gruvbox Dark */
+  --background: #282828;
+  --foreground: #ebdbb2;
+  --surface: #3c3836;
+  --surface-variant: #504945;
+  --accent-primary: #fabd2f;
+  --accent-blue: #83a598;
+  --accent-green: #b8bb26;
+  --accent-red: #fb4934;
+  --accent-orange: #fe8019;
+  --accent-purple: #d3869b;
+  --text-muted: #a89984;
+  --border: #504945;
 }
 
 @theme inline {
@@ -38,4 +65,5 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

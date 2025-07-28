@@ -12,7 +12,7 @@ export default function Home() {
           <h1 className="text-4xl font-bold">Jeff&apos;s Blog</h1>
           <DarkModeToggle />
         </div>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
+        <p className="text-lg" style={{color: 'var(--text-muted)'}}>
           Personal thoughts and tech insights
         </p>
       </header>
@@ -30,43 +30,53 @@ export default function Home() {
         ) : (
           <div className="space-y-8">
             {posts.map((post) => (
-              <article key={post.slug} className="border-b border-gray-200 dark:border-gray-700 pb-8">
-                <Link href={`/blog/${post.slug}`} className="block hover:opacity-80 transition-opacity">
-                  <div className="mb-2">
+              <article key={post.slug} className="pb-8 mb-8" style={{borderBottom: `1px solid var(--border)`}}>
+                <Link href={`/blog/${post.slug}`} className="block hover:opacity-90 transition-opacity">
+                  <div className="mb-3">
                     {post.featured && (
-                      <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full mr-2 mb-2">
-                        Featured
+                      <span 
+                        className="inline-block text-sm font-medium px-3 py-1 rounded-full mr-3 mb-2"
+                        style={{backgroundColor: 'var(--accent-primary)', color: 'var(--background)'}}
+                      >
+                        ⭐ Featured
                       </span>
                     )}
                     {post.category && (
-                      <span className="inline-block bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded-full mr-2 mb-2">
+                      <span 
+                        className="inline-block text-sm px-3 py-1 rounded-full mr-3 mb-2"
+                        style={{backgroundColor: 'var(--surface)', color: 'var(--text-muted)'}}
+                      >
                         {post.category}
                       </span>
                     )}
                   </div>
-                  <h2 className="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400 hover:underline">
+                  <h2 
+                    className="text-3xl font-bold mb-3 hover:underline" 
+                    style={{color: 'var(--accent-blue)'}}
+                  >
                     {post.title}
                   </h2>
-                  <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                  <div className="flex items-center gap-4 text-sm mb-4" style={{color: 'var(--text-muted)'}}>
                     <time>{post.date}</time>
                     {post.readingTime && (
-                      <span>{post.readingTime} min read</span>
+                      <span>📖 {post.readingTime} min read</span>
                     )}
                     {post.updatedOn && post.updatedOn !== post.date && (
-                      <span>Updated: {post.updatedOn}</span>
+                      <span>🔄 Updated: {post.updatedOn}</span>
                     )}
                   </div>
                   {(post.excerpt || post.abstract) && (
-                    <p className="text-gray-700 dark:text-gray-300 mb-3">
+                    <p className="text-lg leading-relaxed mb-4" style={{color: 'var(--foreground)'}}>
                       {post.excerpt || post.abstract}
                     </p>
                   )}
                   {post.tags && post.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-2">
                       {post.tags.map((tag) => (
                         <span 
                           key={tag} 
-                          className="inline-block bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs px-2 py-1 rounded"
+                          className="inline-block text-sm px-2 py-1 rounded"
+                          style={{backgroundColor: 'var(--accent-green)', color: 'var(--background)'}}
                         >
                           #{tag}
                         </span>
