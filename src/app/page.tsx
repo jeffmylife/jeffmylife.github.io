@@ -32,24 +32,6 @@ export default function Home() {
             {posts.map((post) => (
               <article key={post.slug} className="pb-8 mb-8" style={{borderBottom: `1px solid var(--border)`}}>
                 <Link href={`/blog/${post.slug}`} className="block hover:opacity-90 transition-opacity">
-                  <div className="mb-3">
-                    {post.featured && (
-                      <span 
-                        className="inline-block text-sm font-medium px-3 py-1 rounded-full mr-3 mb-2"
-                        style={{backgroundColor: 'var(--accent-primary)', color: 'var(--background)'}}
-                      >
-                        ⭐ Featured
-                      </span>
-                    )}
-                    {post.category && (
-                      <span 
-                        className="inline-block text-sm px-3 py-1 rounded-full mr-3 mb-2"
-                        style={{backgroundColor: 'var(--surface)', color: 'var(--text-muted)'}}
-                      >
-                        {post.category}
-                      </span>
-                    )}
-                  </div>
                   <h2 
                     className="text-3xl font-bold mb-3 hover:underline" 
                     style={{color: 'var(--accent-blue)'}}
@@ -69,19 +51,6 @@ export default function Home() {
                     <p className="text-lg leading-relaxed mb-4" style={{color: 'var(--foreground)'}}>
                       {post.excerpt || post.abstract}
                     </p>
-                  )}
-                  {post.tags && post.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {post.tags.map((tag) => (
-                        <span 
-                          key={tag} 
-                          className="inline-block text-sm px-2 py-1 rounded"
-                          style={{backgroundColor: 'var(--accent-green)', color: 'var(--background)'}}
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
                   )}
                 </Link>
               </article>
