@@ -11,6 +11,7 @@ import CopyButton from '@/components/CopyButton';
 import CopyMarkdownButton from '@/components/CopyMarkdownButton';
 import DarkModeToggle from '@/components/DarkModeToggle';
 import HeaderWithAnchor from '@/components/HeaderWithAnchor';
+import MermaidDiagram from '@/components/MermaidDiagram';
 import { generateSlug } from '@/lib/utils';
 import type { Metadata } from 'next';
 
@@ -210,7 +211,12 @@ export default async function BlogPost({ params }: BlogPostProps) {
               code: ({children, className, ...props}) => {
                 const match = /language-(\w+)/.exec(className || '');
                 if (match) {
-                  // This is a code block inside a <pre>, let the parent handle it
+                  const language = match[1];
+                  // Check if this is a Mermaid diagram
+                  if (language === 'mermaid') {
+                    return <MermaidDiagram>{String(children)}</MermaidDiagram>;
+                  }
+                  // This is a regular code block inside a <pre>, let the parent handle it
                   return <code className={className} {...props}>{children}</code>;
                 }
                 // This is inline code
