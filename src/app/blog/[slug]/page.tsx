@@ -233,15 +233,18 @@ export default async function BlogPost({ params }: BlogPostProps) {
               pre: (props: React.HTMLProps<HTMLPreElement> & { raw?: string }) => {
                 const { children, raw, ...otherProps } = props;
                 
+                // Check if this contains a code element with language-mermaid class
+                const hasMermaidChild = (children as any)?.props?.className?.includes?.('language-mermaid');
+                
                 return (
                   <div className="relative group mb-6">
-                    {/* Copy button positioned absolutely */}
-                    {raw && typeof raw === 'string' && (
+                    {/* Copy button positioned absolutely - skip for Mermaid diagrams */}
+                    {raw && typeof raw === 'string' && !hasMermaidChild && (
                       <div className="absolute top-3 right-3 z-10">
                         <CopyButton text={raw} />
                       </div>
                     )}
-                    {/* Code content */}
+                    {/* Code content - let it render normally */}
                     <pre 
                       className="p-4 rounded-lg overflow-x-auto text-sm m-0" 
                       style={{
