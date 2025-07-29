@@ -179,12 +179,7 @@ pre code {
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Removed automatic dark mode media query to prevent conflict with manual toggle */
 
 body {
   background: var(--background);

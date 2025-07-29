@@ -32,13 +32,23 @@ export default function RootLayout({
             __html: `
               try {
                 const stored = localStorage.getItem('darkMode');
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const isDark = stored ? stored === 'true' : prefersDark;
                 
-                if (isDark) {
-                  document.documentElement.classList.add('dark');
+                if (stored !== null) {
+                  // User has made a manual choice - always respect it
+                  const isDark = stored === 'true';
+                  if (isDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
                 } else {
-                  document.documentElement.classList.remove('dark');
+                  // No manual choice yet - use system preference
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (prefersDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
                 }
               } catch (e) {
                 console.log('Dark mode script error:', e);
