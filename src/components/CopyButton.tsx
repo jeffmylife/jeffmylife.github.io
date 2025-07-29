@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface CopyButtonProps {
   text: string;
@@ -9,8 +9,14 @@ interface CopyButtonProps {
 
 export default function CopyButton({ text, className = '' }: CopyButtonProps) {
   const [isCopied, setIsCopied] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const copy = async () => {
+    if (!mounted) return;
     try {
       await navigator.clipboard.writeText(text);
       setIsCopied(true);
@@ -19,6 +25,13 @@ export default function CopyButton({ text, className = '' }: CopyButtonProps) {
       console.error('Failed to copy text:', err);
     }
   };
+
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="w-8 h-8 rounded animate-pulse" style={{backgroundColor: 'var(--surface)'}} />
+    );
+  }
 
   return (
     <button

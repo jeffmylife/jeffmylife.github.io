@@ -226,7 +226,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 return (
                   <div className="relative group mb-6">
                     {/* Copy button positioned absolutely */}
-                    {raw && (
+                    {raw && typeof raw === 'string' && (
                       <div className="absolute top-3 right-3 z-10">
                         <CopyButton text={raw} />
                       </div>
