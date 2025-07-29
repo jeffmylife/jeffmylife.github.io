@@ -248,10 +248,9 @@ export default async function BlogPost({ params }: BlogPostProps) {
               },
               blockquote: ({children, ...props}) => (
                 <blockquote 
-                  className="pl-4 py-3 mb-6 italic rounded-r border-l-4" 
+                  className="border-l-4 pl-4 my-4 italic"
                   style={{
-                    borderColor: 'var(--accent-blue)',
-                    backgroundColor: 'var(--surface)',
+                    borderColor: 'var(--text-muted)',
                     color: 'var(--text-muted)'
                   }}
                   {...props}

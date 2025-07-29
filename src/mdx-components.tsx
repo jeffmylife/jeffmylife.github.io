@@ -53,9 +53,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </li>
     ),
     blockquote: ({ children, ...props }) => (
-      <blockquote className="border-l-4 border-blue-500 pl-4 py-2 mb-4 italic text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800" {...props}>
-        {children}
-      </blockquote>
+      <div className="my-8 relative">
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 via-purple-500 to-pink-500 rounded-full"></div>
+        <blockquote className="ml-6 pl-6 py-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg relative overflow-hidden" {...props}>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-purple-50/30 to-pink-50/50 dark:from-blue-900/10 dark:via-purple-900/10 dark:to-pink-900/10"></div>
+          <div className="relative z-10">
+            <div className="text-6xl text-blue-400/20 dark:text-blue-300/20 font-serif leading-none mb-2">"</div>
+            <div className="text-lg font-medium text-gray-800 dark:text-gray-200 leading-relaxed -mt-8 pl-8">
+              {children}
+            </div>
+          </div>
+        </blockquote>
+      </div>
     ),
     code: ({ children, ...props }) => (
       <code className="bg-gray-100 dark:bg-gray-800 text-red-600 dark:text-red-400 px-1 py-0.5 rounded text-sm font-mono" {...props}>
