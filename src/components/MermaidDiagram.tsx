@@ -93,9 +93,8 @@ export default function MermaidDiagram({ children }: MermaidDiagramProps) {
         gantt: {
           useMaxWidth: true,
         },
-        // Enable responsive behavior
-        maxWidth: 1200,
-        responsive: true,
+        // Enable responsive behavior - these go in diagram-specific config
+        maxTextSize: 50000,
       });
       setIsInitialized(true);
     }
