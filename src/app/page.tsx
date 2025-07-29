@@ -9,7 +9,33 @@ export default function Home() {
     <div className="min-h-screen p-8 max-w-4xl mx-auto">
       <header className="mb-12">
         <div className="flex justify-between items-start mb-4">
-          <h1 className="text-4xl font-bold">Jeffrey Lemoine&apos;s Weblog</h1>
+          <h1 className="text-4xl font-bold">
+            Jeffrey Lemoine&apos;s{' '}
+            <span
+              className="relative group cursor-help"
+            >
+              WeBlog
+              <span 
+                className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 px-4 py-3 text-sm rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-50 w-80 text-left shadow-lg"
+                style={{
+                  backgroundColor: 'var(--surface)',
+                  color: 'var(--foreground)',
+                  border: '1px solid var(--border)'
+                }}
+              >
+                <div 
+                  className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0"
+                  style={{
+                    borderLeft: '6px solid transparent',
+                    borderRight: '6px solid transparent',
+                    borderBottom: '6px solid var(--border)'
+                  }}
+                />
+                <div className="font-medium mb-1" style={{color: 'var(--accent-blue)'}}>Etymology</div>
+                &ldquo;Weblog&rdquo; is a portmanteau of &ldquo;web&rdquo; and &ldquo;log&rdquo;. The term was coined in 1997 by Jorn Barger to mean a log (journal) on the web. It was later shortened to &ldquo;blog&rdquo;.
+              </span>
+            </span>
+          </h1>
           <DarkModeToggle />
         </div>
         <p className="text-lg" style={{color: 'var(--text-muted)'}}>
