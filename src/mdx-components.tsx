@@ -58,7 +58,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         <blockquote className="ml-6 pl-6 py-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg relative overflow-hidden" {...props}>
           <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-purple-50/30 to-pink-50/50 dark:from-blue-900/10 dark:via-purple-900/10 dark:to-pink-900/10"></div>
           <div className="relative z-10">
-            <div className="text-6xl text-blue-400/20 dark:text-blue-300/20 font-serif leading-none mb-2">"</div>
+            <div className="text-6xl text-blue-400/20 dark:text-blue-300/20 font-serif leading-none mb-2">&ldquo;</div>
             <div className="text-lg font-medium text-gray-800 dark:text-gray-200 leading-relaxed -mt-8 pl-8">
               {children}
             </div>
