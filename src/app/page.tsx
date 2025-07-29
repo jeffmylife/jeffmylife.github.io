@@ -9,11 +9,11 @@ export default function Home() {
     <div className="min-h-screen p-8 max-w-4xl mx-auto">
       <header className="mb-12">
         <div className="flex justify-between items-start mb-4">
-          <h1 className="text-4xl font-bold">Jeff&apos;s Blog</h1>
+          <h1 className="text-4xl font-bold">Jeffrey Lemoine&apos;s Weblog</h1>
           <DarkModeToggle />
         </div>
         <p className="text-lg" style={{color: 'var(--text-muted)'}}>
-          Personal thoughts and tech insights
+          I write about technology and other things.
         </p>
       </header>
 
