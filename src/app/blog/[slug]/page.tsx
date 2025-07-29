@@ -8,6 +8,7 @@ import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import { preProcess, postProcess } from '@/lib/rehype-pre-raw';
 import CopyButton from '@/components/CopyButton';
+import CopyMarkdownButton from '@/components/CopyMarkdownButton';
 import DarkModeToggle from '@/components/DarkModeToggle';
 import HeaderWithAnchor from '@/components/HeaderWithAnchor';
 import { generateSlug } from '@/lib/utils';
@@ -134,7 +135,10 @@ export default async function BlogPost({ params }: BlogPostProps) {
         >
           ← Back to Home
         </Link>
-        <DarkModeToggle />
+        <div className="flex items-center gap-3">
+          <CopyMarkdownButton content={post.content} />
+          <DarkModeToggle />
+        </div>
       </nav>
       
       <article className="max-w-4xl mx-auto">
