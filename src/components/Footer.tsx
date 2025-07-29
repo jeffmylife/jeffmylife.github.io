@@ -1,4 +1,4 @@
-import { FaXTwitter, FaLinkedin } from 'react-icons/fa6';
+import { FaXTwitter, FaLinkedin, FaGithub } from 'react-icons/fa6';
 import { SiGooglescholar } from 'react-icons/si';
 
 export default function Footer() {
@@ -24,6 +24,16 @@ export default function Footer() {
             style={{color: 'var(--text-muted)'}}
           >
             <FaLinkedin size={20} />
+          </a>
+          
+          <a
+            href="https://github.com/jeffmylife"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-70 transition-opacity"
+            style={{color: 'var(--text-muted)'}}
+          >
+            <FaGithub size={20} />
           </a>
           
           <a
