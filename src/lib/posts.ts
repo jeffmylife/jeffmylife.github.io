@@ -19,11 +19,8 @@ export interface Post {
   excerpt?: string;
   abstract?: string;
   content: string;
-  tags?: string[];
-  category?: string;
   isPublished?: boolean;
   readingTime?: number;
-  featured?: boolean;
 }
 
 export function getAllPosts(): Post[] {
@@ -49,11 +46,8 @@ export function getAllPosts(): Post[] {
         excerpt: data.excerpt || data.abstract || '',
         abstract: data.abstract,
         content,
-        tags: data.tags || [],
-        category: data.category,
         isPublished: data.isPublished !== false, // Default to true unless explicitly false
         readingTime: data.readingTime || calculateReadingTime(content),
-        featured: data.featured || false,
       };
     });
 
@@ -77,11 +71,8 @@ export function getPostBySlug(slug: string): Post | null {
       excerpt: data.excerpt || data.abstract || '',
       abstract: data.abstract,
       content,
-      tags: data.tags || [],
-      category: data.category,
       isPublished: data.isPublished !== false,
       readingTime: data.readingTime || calculateReadingTime(content),
-      featured: data.featured || false,
     };
   } catch {
     return null;

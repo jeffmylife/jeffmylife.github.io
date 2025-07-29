@@ -42,14 +42,12 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
   const description = post.abstract || post.excerpt || '';
   const publishedTime = post.date;
   const modifiedTime = post.updatedOn || post.date;
-  const tags = post.tags || [];
   const url = `https://jeffmylife.github.io/blog/${slug}`;
   const imageUrl = `https://jeffmylife.github.io/api/og?title=${encodeURIComponent(post.title)}`;
 
   return {
     title,
     description,
-    keywords: tags.join(', '),
     authors: [{ name: 'Jeff', url: 'https://jeffmylife.github.io' }],
     creator: 'Jeff',
     publisher: 'Jeff',
@@ -62,7 +60,6 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
       publishedTime,
       modifiedTime,
       authors: ['Jeff'],
-      tags,
       images: [
         {
           url: imageUrl,
@@ -111,8 +108,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
       name: "Jeff",
       url: "https://jeffmylife.github.io"
     },
-    keywords: post.tags?.join(', ') || '',
-    articleSection: post.category || 'Technology',
+    articleSection: 'Technology',
     wordCount: post.content.split(/\s+/).length,
     timeRequired: `PT${post.readingTime || 1}M`,
     url: `https://jeffmylife.github.io/blog/${post.slug}`,
@@ -145,24 +141,6 @@ export default async function BlogPost({ params }: BlogPostProps) {
       
       <article className="max-w-4xl mx-auto">
         <header className="mb-8">
-          <div className="mb-4">
-            {post.featured && (
-              <span 
-                className="inline-block text-sm font-medium px-3 py-1 rounded-full mr-3 mb-2"
-                style={{backgroundColor: 'var(--accent-primary)', color: 'var(--background)'}}
-              >
-                ⭐ Featured Post
-              </span>
-            )}
-            {post.category && (
-              <span 
-                className="inline-block text-sm px-3 py-1 rounded-full mr-3 mb-2"
-                style={{backgroundColor: 'var(--surface)', color: 'var(--text-muted)'}}
-              >
-                {post.category}
-              </span>
-            )}
-          </div>
           
           <h1 className="text-5xl font-bold mb-6" style={{color: 'var(--foreground)'}}>{post.title}</h1>
           
@@ -181,20 +159,6 @@ export default async function BlogPost({ params }: BlogPostProps) {
               <span>📖 {post.readingTime} minute read</span>
             )}
           </div>
-          
-          {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-8">
-              {post.tags.map((tag) => (
-                <span 
-                  key={tag} 
-                  className="inline-block text-sm px-3 py-1 rounded-full"
-                  style={{backgroundColor: 'var(--accent-green)', color: 'var(--background)'}}
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
         </header>
         
         <div className="prose prose-lg prose-gray dark:prose-invert max-w-none">
