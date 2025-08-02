@@ -1,5 +1,5 @@
 import type { MDXComponents } from 'mdx/types'
-import { TweetImage } from './components/TweetImage'
+import { Img } from './components/Img'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -102,7 +102,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     hr: (props) => (
       <hr className="my-8 border-gray-300 dark:border-gray-700" {...props} />
     ),
-    TweetImage,
+    Img,
     ...components,
   }
 }

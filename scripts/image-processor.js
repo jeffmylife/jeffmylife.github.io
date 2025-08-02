@@ -36,11 +36,15 @@ function resolvePath(inputPath) {
   return cleanPath;
 }
 
-function generateFileName(url) {
-  // Extract meaningful parts from the URL to create a filename
-  const urlParts = url.match(/\/status\/(\d+)/);
-  const statusId = urlParts ? urlParts[1] : Date.now().toString();
-  return `tweet-${statusId}`;
+function generateFileName(description) {
+  // Generate filename from description or timestamp
+  const cleanDescription = description
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .substring(0, 50);
+  
+  return cleanDescription || `image-${Date.now()}`;
 }
 
 function convertToWebP(inputPath, outputPath) {
@@ -65,32 +69,6 @@ function convertToWebP(inputPath, outputPath) {
     }
   }
   return outputPath;
-}
-
-function saveMetadata(fileName, url, article, outputDir) {
-  const metadataPath = path.join(path.dirname(outputDir), 'metadata.json');
-  let metadata = {};
-  
-  // Load existing metadata if it exists
-  if (fs.existsSync(metadataPath)) {
-    try {
-      metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
-    } catch (error) {
-      console.log('⚠️  Could not read existing metadata, creating new file');
-    }
-  }
-  
-  // Add new entry
-  metadata[fileName] = {
-    url: url,
-    article: article,
-    createdAt: new Date().toISOString(),
-    fileName: fileName
-  };
-  
-  // Save metadata
-  fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
-  console.log(`💾 Saved metadata for ${fileName} in article: ${article}`);
 }
 
 function getAvailableArticles() {
@@ -137,35 +115,34 @@ async function getArticleSlug() {
 }
 
 async function main() {
-  console.log('🐦 Tweet Screenshot Processor');
-  console.log('==============================');
+  console.log('🖼️  Image Processor for Blog');
+  console.log('===========================');
   
   try {
     // Get input file path
-    const rawScreenshotPath = await question('📁 Enter the path to your PNG screenshot: ');
-    const screenshotPath = resolvePath(rawScreenshotPath);
+    const rawImagePath = await question('📁 Enter the path to your image (PNG/JPG): ');
+    const imagePath = resolvePath(rawImagePath);
     
-    console.log(`🔍 Resolved path: ${screenshotPath}`);
+    console.log(`🔍 Resolved path: ${imagePath}`);
     
-    if (!fs.existsSync(screenshotPath)) {
+    if (!fs.existsSync(imagePath)) {
       console.log('❌ File not found!');
-      console.log(`   Tried: ${screenshotPath}`);
+      console.log(`   Tried: ${imagePath}`);
       process.exit(1);
     }
     
-    // Get tweet URL
-    const tweetUrl = (await question('🔗 Enter the tweet URL: ')).trim();
+    // Get image description
+    const description = await question('📝 Enter image description (for filename): ');
     
-    if (!tweetUrl.includes('twitter.com') && !tweetUrl.includes('x.com')) {
-      console.log('⚠️  Warning: URL doesn\'t look like a Twitter/X URL');
-    }
+    // Get optional URL (for clickable images)
+    const imageUrl = (await question('🔗 Enter URL to link to (optional, press Enter to skip): ')).trim();
     
     // Get article slug
     const articleSlug = await getArticleSlug();
     console.log(`📝 Article: ${articleSlug}`);
     
     // Generate filename
-    const fileName = generateFileName(tweetUrl);
+    const fileName = generateFileName(description);
     console.log(`📝 Generated filename: ${fileName}`);
     
     // Create article-specific directory
@@ -177,22 +154,37 @@ async function main() {
     
     // Convert to WebP
     const outputPath = path.join(articleDir, `${fileName}.webp`);
-    const finalPath = convertToWebP(screenshotPath, outputPath);
+    const finalPath = convertToWebP(imagePath, outputPath);
     
-    // Save metadata
-    saveMetadata(fileName, tweetUrl, articleSlug, articleDir);
+    // Generate MDX code
+    const relativePath = `/static/${articleSlug}/${path.basename(finalPath)}`;
+    const mdxCode = imageUrl ? 
+      `<div 
+    data-img-src="${relativePath}" 
+    data-img-alt="${description}" 
+    data-img-url="${imageUrl}" 
+    data-img-size="400" 
+    data-img-caption="${description}"
+    >
+    Loading image...
+</div>` :
+      `<div 
+    data-img-src="${relativePath}" 
+    data-img-alt="${description}" 
+    data-img-size="400"
+    >
+    Loading image...
+</div>`;
     
     console.log('');
     console.log('✅ Processing complete!');
-    console.log(`📂 Files created in: ${articleDir}`);
-    console.log(`🖼️  Image: ${path.basename(finalPath)}`);
-    console.log(`📊 Metadata: public/static/metadata.json`);
+    console.log(`📂 Image saved: ${finalPath}`);
     console.log('');
-    console.log('📝 Usage in your MDX file:');
-    console.log(`   <TweetImage id="${fileName}" />`);
+    console.log('📝 Copy this code into your MDX file:');
     console.log('');
-    console.log('💡 Import the component at the top of your MDX:');
-    console.log('   import { TweetImage } from "../../src/components/TweetImage";');
+    console.log(mdxCode);
+    console.log('');
+    console.log('💡 Adjust data-img-size to change the image width (e.g., "200", "600")');
     
   } catch (error) {
     console.error('❌ Error:', error.message);

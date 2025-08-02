@@ -7,15 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "tweet": "node scripts/tweet-processor.js"
+    "img": "node scripts/image-processor.js"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.4.4",
     "@radix-ui/react-tooltip": "^1.2.7",
-    "@remark-embedder/core": "^3.0.3",
-    "@remark-embedder/transformer-oembed": "^5.0.1",
     "@tailwindcss/typography": "^0.5.16",
     "@types/mdx": "^2.0.13",
     "class-variance-authority": "^0.7.1",

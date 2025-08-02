@@ -5,7 +5,6 @@ import { MarkdownAsync } from 'react-markdown';
 import Link from 'next/link';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
-import { remarkEmbedderPlugin } from '@/lib/remark-embedder';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import { preProcess, postProcess } from '@/lib/rehype-pre-raw';
@@ -14,7 +13,7 @@ import CopyMarkdownButton from '@/components/CopyMarkdownButton';
 import DarkModeToggle from '@/components/DarkModeToggle';
 import HeaderWithAnchor from '@/components/HeaderWithAnchor';
 import MermaidDiagram from '@/components/MermaidDiagram';
-import { TweetImage } from '@/components/TweetImage';
+import { Img } from '@/components/Img';
 import { generateSlug } from '@/lib/utils';
 import type { Metadata } from 'next';
 
@@ -165,7 +164,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
         
         <div className="prose prose-lg prose-gray dark:prose-invert max-w-none">
           <MarkdownAsync
-            remarkPlugins={[remarkGfm, remarkBreaks, remarkEmbedderPlugin]}
+            remarkPlugins={[remarkGfm, remarkBreaks]}
             rehypePlugins={[preProcess, rehypeHighlight, postProcess, rehypeRaw]}
             components={{
               h1: ({children, ...props}) => <HeaderWithAnchor level={1} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
@@ -273,9 +272,17 @@ export default async function BlogPost({ params }: BlogPostProps) {
               ),
               hr: (props) => <hr className="my-8" style={{borderColor: 'var(--border)'}} {...props} />,
               div: (props: any) => {
-                // Check if this is a tweet placeholder
-                if (props['data-tweet-id']) {
-                  return <TweetImage id={props['data-tweet-id']} />;
+                // Check if this is an image placeholder
+                if (props['data-img-src']) {
+                  return (
+                    <Img
+                      src={props['data-img-src']}
+                      alt={props['data-img-alt'] || 'Image'}
+                      url={props['data-img-url']}
+                      size={parseInt(props['data-img-size']) || 400}
+                      caption={props['data-img-caption']}
+                    />
+                  );
                 }
                 return <div {...props} />;
               },
