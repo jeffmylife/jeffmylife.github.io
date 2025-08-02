@@ -271,7 +271,13 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 </td>
               ),
               hr: (props) => <hr className="my-8" style={{borderColor: 'var(--border)'}} {...props} />,
-              div: (props: any) => {
+              div: (props: React.HTMLProps<HTMLDivElement> & { 
+                'data-img-src'?: string;
+                'data-img-alt'?: string;
+                'data-img-url'?: string;
+                'data-img-size'?: string;
+                'data-img-caption'?: string;
+              }) => {
                 // Check if this is an image placeholder
                 if (props['data-img-src']) {
                   return (
@@ -279,7 +285,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
                       src={props['data-img-src']}
                       alt={props['data-img-alt'] || 'Image'}
                       url={props['data-img-url']}
-                      size={parseInt(props['data-img-size']) || 400}
+                      size={parseInt(props['data-img-size'] || '400')}
                       caption={props['data-img-caption']}
                     />
                   );
