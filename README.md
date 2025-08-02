@@ -83,6 +83,38 @@ This blog has a streamlined workflow for embedding images with SEO optimization:
 - ✅ **Captions** - Semantic figure/figcaption elements
 - ✅ **Article Organization** - Images stored per article
 
+## Development Workflow
+
+This project uses pre-commit hooks to ensure code quality:
+
+### Pre-commit Hooks
+
+- **Linting**: ESLint runs on staged TypeScript/JavaScript files
+- **Type Checking**: TypeScript compiler validates types
+- **Commit Message Validation**: Ensures conventional commit format
+
+### Available Scripts
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run lint         # Run ESLint + TypeScript checking
+npm run type-check   # TypeScript type checking only
+npm run img          # Process images for blog posts
+```
+
+### Commit Message Format
+
+Follow the conventional commit format:
+```
+type(scope): description
+
+Examples:
+feat(blog): add new post about TypeScript
+fix(ci): resolve build error in deployment
+docs(readme): update installation instructions
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
