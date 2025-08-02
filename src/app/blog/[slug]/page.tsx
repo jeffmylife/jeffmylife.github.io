@@ -1,10 +1,11 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { getPostBySlug, getAllPosts } from '@/lib/posts';
-import ReactMarkdown from 'react-markdown';
+import { MarkdownAsync } from 'react-markdown';
 import Link from 'next/link';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
+import { remarkEmbedderPlugin } from '@/lib/remark-embedder';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import { preProcess, postProcess } from '@/lib/rehype-pre-raw';
@@ -162,8 +163,8 @@ export default async function BlogPost({ params }: BlogPostProps) {
         </header>
         
         <div className="prose prose-lg prose-gray dark:prose-invert max-w-none">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm, remarkBreaks]}
+          <MarkdownAsync
+            remarkPlugins={[remarkGfm, remarkBreaks, remarkEmbedderPlugin]}
             rehypePlugins={[preProcess, rehypeHighlight, postProcess, rehypeRaw]}
             components={{
               h1: ({children, ...props}) => <HeaderWithAnchor level={1} id={generateSlug(String(children))} {...props}>{children}</HeaderWithAnchor>,
@@ -273,7 +274,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
             }}
           >
             {post.content}
-          </ReactMarkdown>
+          </MarkdownAsync>
         </div>
       </article>
     </div>
