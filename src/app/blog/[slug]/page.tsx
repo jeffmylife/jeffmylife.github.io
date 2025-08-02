@@ -14,6 +14,7 @@ import CopyMarkdownButton from '@/components/CopyMarkdownButton';
 import DarkModeToggle from '@/components/DarkModeToggle';
 import HeaderWithAnchor from '@/components/HeaderWithAnchor';
 import MermaidDiagram from '@/components/MermaidDiagram';
+import { TweetImage } from '@/components/TweetImage';
 import { generateSlug } from '@/lib/utils';
 import type { Metadata } from 'next';
 
@@ -271,6 +272,13 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 </td>
               ),
               hr: (props) => <hr className="my-8" style={{borderColor: 'var(--border)'}} {...props} />,
+              div: (props: any) => {
+                // Check if this is a tweet placeholder
+                if (props['data-tweet-id']) {
+                  return <TweetImage id={props['data-tweet-id']} />;
+                }
+                return <div {...props} />;
+              },
             }}
           >
             {post.content}
