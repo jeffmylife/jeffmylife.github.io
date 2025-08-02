@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+# Simple commit message validation
+commit_regex='^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?: .{1,50}'
+
+if ! grep -qE "$commit_regex" "$1"; then
+    echo "ERROR: Commit message format is invalid."
+    echo "Expected format: type(scope): description"
+    echo "Types: feat, fix, docs, style, refactor, test, chore"
+    echo "Example: feat(blog): add new post about TypeScript"
+    exit 1
+fi
