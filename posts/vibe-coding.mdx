@@ -8,7 +8,6 @@ excerpt: But what is vibe coding?
 ---
 
 The term "vibe coding" was coined by OpenAI co-founder Andrej Karpathy in an [X post](https://x.com/karpathy/status/1886192184808149383) on February 2, 2025. This legendary post has spawned a movement where startups let non-programmers build software. The key thing in this post I think is very under-appreciated here is that Andrej says it's "where you fully give in to the vibes." In other words, if you're reading the code or thinking about implementations, diffs, or architecture **you aren't vibe coding**. At least, strictly.
-
 Here's the original tweet that started it all:
 
 <div 
@@ -21,4 +20,114 @@ Here's the original tweet that started it all:
     Loading image...
 </div>
 
-However, I think the term has expanded beyond the original intention of the post. My observation is that the term "vibe coding" has taken a life of its own - now meaning something like "user prompt-driven development". I include the "spec-driven development" trend in this too. It's any case where you ask for something and the system "figures out" how to code it for you. 
+However, the term has expanded beyond the original intention of the post. My observation is that the term "vibe coding" has taken a life of its own - now meaning something like "prompt-driven development". I include the spec-driven development trend in this too. It's any case where you ask for something and an LLM just "figures it out."
+
+I hear people say things like "I vibe coded 90% of it." Doesn't that imply you didn't "fully give in to the vibes"?  This is why vibe coding should be considered as a spectrum. For example, I will describe in detail what I want and explore different implementation options *before* implementation. But then let the AI rip. In this process I did not specify everything that could be specified (that would just be programming) but I brought in the level that I thought was appropriate.
+
+## "Embrace exponentials"
+
+What did the post mean by embracing exponentials? First a quote to prime you:
+
+> Our intuition about the future is linear. But the reality of information technology is exponential, and that makes a profound difference. If I take 30 steps linearly, I get to 30. If I take 30 steps exponentially, I get to a billion.
+> \- Ray Kurzweil
+
+So in regards to AI are we on an exponential? Generally, yes, but with respect to what? There are many benchmarks to use but for coding we can use the length of software tasks AI agents can complete - as measured by how long it would take a human. 
+
+<div 
+    data-img-src="/static/vibe-coding/measuring-ai-ability-to-complete-long-tasks.webp" 
+    data-img-alt="measuring-ai-ability-to-complete-long-tasks" 
+    data-img-url="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/" 
+    data-img-size="800" 
+    data-img-caption="Chart showing exponential growth in the length of software tasks AI can complete, from METR's 2025 study"
+    >
+    Loading image...
+</div>
+
+If we are on an exponential for AI what will thing look like? Well, this could be like predicting the Call of Duty from Pong. But that's the crazy thing about exponentials - things will be radically different in a short period of time.
+
+So how can you embrace the fact that AIs will continue getting exponentially better at coding? I don't know for sure. It's probably learning how to interact with something new and, to be honest, uncomfortable. I say this because sometimes it bothers me to not know how something works when I'm its owner. Other times, I don't care. 
+
+Overall, my experience is that when models get significantly better it's good to refresh old projects or even start them over from scratch. I will also explore some ideas I don't want to put time or much effort in to since I don't know if they're worth it. If the cost to try something is low, I'll try it! 
+
+## Vibe Coding Interfaces
+
+What is [Cursor](https://cursor.com)? It's a fork of the VS Code IDE that added AI features. But it was more than just tab completes. It put an AI chat inside the editor. You could even highlight some code and prompt AI to edit it. The transition was seamless since it imported my VS Code settings - it started to make sense why they opted to fork something familiar.
+
+This became a bit of a meme because it seemed increasingly popular.
+
+<div 
+    data-img-src="/static/vibe-coding/fork-vscode1.webp" 
+    data-img-alt="fork-vscode1" 
+    data-img-url="https://devrant.com/rants/11313675/this-is-why-i-don-t-drink" 
+    data-img-size="300" 
+    >
+    Loading image...
+</div>
+
+At first, I saw Cursor simply as a convenience so I don't have to copy paste things into and out of ChatGPT/Claude. I could write `@my_file.py` and it's in context. But then it could edit the files (with permissions). And then without permission ("[yolo mode](https://cursor.com/changelog/agent-improvements-yolo-mode-cursor-tab-update)"). This blossomed into the what we now call Agent Mode. 
+
+With Agent Mode you can ask it to do something and it will just do it. Is it perfect? No. But in some cases it's so good that it makes sense how they got to make [$100M ARR](https://sacra.com/research/cursor-at-100m-arr/). 
+
+After ChatGPT and the like, Cursor was the first AI product. It was a fundamentally new experience beyond *chatting*. It was doing things and doing them good enough.
+
+Things like Lovable came around where users could vibe code an entire website. In practice, this was closer to the original definition of vibe coding since most of these users didn't know how to code and were forced to fully give into the vibes. Lovable become the fastest company to go from [$1M to $100M ARR](https://lovable.dev/blog/agent) ever, doing it in 8 months; in fact, Cursor was the previous record holder for 12 months.
+
+Was there a common theme between these companies which made them so successful? 
+
+### Partial Autonomy UI/UX 
+
+Andrej Karpathy gave a [great talk](https://youtu.be/LCEmiRjPEtQ?si=ELIi16fk5OdHM6fE) entitled "Software in the era of AI" where he offered a few insights which I think are prophetic, just like his vibe coding tweet.
+
+In reference to the success of Cursor, he mentions it was blending a traditional interface (VS Code) with an AI one. He spoke about the concept of "Autonomy Sliders" where one can choose the level of autonomy that's appropriate for the situation.
+
+In Cursor you have:
+- `Tab` Mode (tab-complete as you're writing code), 
+- `Cmd+K` (highlight specific code to edit with prompt), 
+- `Cmd+L` (chat with your codebase and docs)
+- and `Cmd+I` (instruct agent to make changes and perform tasks). 
+
+The user interface is tailored to give users choice about to what degree they need autonomy. For example, I don't need agent mode to update a single component and since the tab complete can't see what I'm doing I'll just explain quickly with `Cmd+K`. 
+
+He referred to these things as a "partial autonomy UI/UX" where humans collaborate with AI to do something. 
+### Generation-Verification Cycle
+
+The workflow of the partial autonomy UX is the "Generation-Verification Cycle". 
+
+<div 
+    data-img-src="/static/vibe-coding/partial-autonomy-ux.webp" 
+    data-img-alt="partial-autonomy-ux" 
+    data-img-size="600"
+    data-img-caption="Partial Autonomy UI/UX"
+    data-img-url="https://youtu.be/LCEmiRjPEtQ?si=l9sUZzISPwdldSNs"
+    >
+    Loading image...
+</div>
+
+AI generates something and humans can verify this aligns with what the human wants. They will instruct the AI with adjustments and the cycle continues. 
+
+In the diagram, we can see it's important to make the **verification** by humans easy and fast. I would adjust it to be *high-leverage* and *fun*. High-leverage verification would be like viewing an architecture diagram instead of reading specific code. *Fun* because this is possible! There's no reason to not automate the boring the stuff, so why not ensure the remainder be fun? In other words, if I were to *prompt me* to do my favorite parts of programming that would be the best case scenario.
+
+The other part of the cycle is **generation** from the AI. It says to "keep AI 'on a tight leash' to increase the probability of successful verification." In the case of code, it could be linters and tests before presenting code for me to verify. I will obviously have to copy-paste any errors before even verifying the other change, so preventing that extra step is important to stay fast, high-leverage, and fun.
+
+## Problems with vibe coding
+
+All technology technological advancement makes new problems.
+
+> Technology is a means of producing new problems. Over time we are generating new technologies, we’re producing all new problems. Most of the problems we have today are technogenic, meaning that they were created by technology in the past. Most of the problems in the future are going to be created by technologies we’re creating today.
+> - Kevin Kelley, [here](https://www.edge.org/conversation/kevin_kelly-the-technium) 
+
+I won't go too deep into the problems with vibe coding since they are so often talked about. They generally revolve around the fact that programming [n00bs](https://en.wikipedia.org/wiki/Leet#n00b) who don't know what they're building are creating security vulnerabilities, AI slop, or just downright bad products. 
+
+Does this mean vibe coding is bad? No, it means that we're early. I can imagine that there will be a framework solving the woes of vibe coding to make it really hard for these things to happen. It'll be like the Roblox of vibe coding. 
+
+## Future of vibe coding?
+
+Likely, there will be more and more [provably-correct hosting systems](https://youtu.be/fHWFF_pnqDk?si=u1kLgHmgZsa2t2yv) for making apps/ui's that are "safe" such that you can't mess up auth, permissions, or billing. 
+
+When the dust settles, there may be a new abstraction layer on computing that will be unrecognizable. New programming languages, frameworks, and systems will emerge to solve problems we haven't even thought of. 
+
+However, my view is that specifying intentions in a precise language won't disappear anytime soon.
+
+## Vibe X'ing
+
+If we vibe coding to mean we can specify what we want in natural language and something will be coded, then why can't we *vibe* other things? I'll just throw a list of examples to make my point: 
