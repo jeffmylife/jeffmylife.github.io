@@ -187,9 +187,14 @@ export default function VibeSearch() {
                           }}
                         >
                           <div className="flex justify-between items-start mb-2">
-                            <h3 className="font-semibold text-base" style={{color: 'var(--accent-blue)'}}>
-                              {result.item.name}
-                            </h3>
+                            <div className="flex-1">
+                              <h3 className="font-semibold text-base" style={{color: 'var(--accent-blue)'}}>
+                                {result.item.name}
+                              </h3>
+                              <p className="text-xs mt-1" style={{color: 'var(--text-muted)'}}>
+                                {new URL(result.item.url).hostname.replace('www.', '')}
+                              </p>
+                            </div>
                             <ExternalLink className="h-4 w-4 flex-shrink-0" style={{color: 'var(--text-muted)'}} />
                           </div>
                           
@@ -198,6 +203,26 @@ export default function VibeSearch() {
                           </p>
                           
                           <div className="flex items-center justify-between">
+                            <div className="flex gap-1 flex-wrap">
+                              {result.item.tags.slice(0, 3).map((tag, idx) => (
+                                <span 
+                                  key={idx}
+                                  className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800" 
+                                  style={{color: 'var(--text-muted)'}}
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                              {result.item.tags.length > 3 && (
+                                <span 
+                                  className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800" 
+                                  style={{color: 'var(--text-muted)'}}
+                                >
+                                  +{result.item.tags.length - 3}
+                                </span>
+                              )}
+                            </div>
+                            
                             <a
                               href={result.item.url}
                               target="_blank"
@@ -226,9 +251,14 @@ export default function VibeSearch() {
                   }}
                 >
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="font-semibold text-lg" style={{color: 'var(--accent-blue)'}}>
-                      {result.item.name}
-                    </h3>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg" style={{color: 'var(--accent-blue)'}}>
+                        {result.item.name}
+                      </h3>
+                      <p className="text-sm mt-1" style={{color: 'var(--text-muted)'}}>
+                        {new URL(result.item.url).hostname.replace('www.', '')}
+                      </p>
+                    </div>
                     <ExternalLink className="h-4 w-4 flex-shrink-0" style={{color: 'var(--text-muted)'}} />
                   </div>
                   
@@ -237,9 +267,28 @@ export default function VibeSearch() {
                   </p>
                   
                   <div className="flex items-center justify-between">
-                    <span className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800" style={{color: 'var(--text-muted)'}}>
-                      {result.item.category}
-                    </span>
+                    <div className="flex gap-1 flex-wrap">
+                      <span className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800" style={{color: 'var(--text-muted)'}}>
+                        {result.item.category}
+                      </span>
+                      {result.item.tags.slice(0, 2).map((tag, idx) => (
+                        <span 
+                          key={idx}
+                          className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800" 
+                          style={{color: 'var(--text-muted)'}}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {result.item.tags.length > 2 && (
+                        <span 
+                          className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800" 
+                          style={{color: 'var(--text-muted)'}}
+                        >
+                          +{result.item.tags.length - 2}
+                        </span>
+                      )}
+                    </div>
                     
                     <a
                       href={result.item.url}
