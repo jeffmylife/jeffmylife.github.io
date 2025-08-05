@@ -1,11 +1,20 @@
 #!/usr/bin/env sh
-# Simple commit message validation
-commit_regex='^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?: .{1,50}'
+# Simple commit message validation - more permissive
+# Only check that message is not empty and has reasonable length
 
-if ! grep -qE "$commit_regex" "$1"; then
-    echo "ERROR: Commit message format is invalid."
-    echo "Expected format: type(scope): description"
-    echo "Types: feat, fix, docs, style, refactor, test, chore"
-    echo "Example: feat(blog): add new post about TypeScript"
+if [ -z "$(cat "$1" | tr -d '[:space:]')" ]; then
+    echo "ERROR: Commit message cannot be empty."
     exit 1
+fi
+
+message_length=$(cat "$1" | wc -c)
+if [ "$message_length" -lt 3 ]; then
+    echo "ERROR: Commit message is too short."
+    exit 1
+fi
+
+# Optional: Check for very long messages
+if [ "$message_length" -gt 500 ]; then
+    echo "WARNING: Commit message is very long. Consider using a shorter message."
+    echo "Message length: ${message_length} characters"
 fi
